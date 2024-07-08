@@ -6,6 +6,15 @@ const PORT = 3000
 
 app.use(express.json())
 
+/* Structure of a note in notes is like this: */
+/*
+{
+   id: uuidV4(),
+   title: String,
+   content: String,
+   isDraft: Boolean
+}
+*/
 let notes = []
 
 app.get("/", (req, res) => {
