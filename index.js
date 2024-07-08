@@ -38,6 +38,12 @@ app.get("/notes/:id", (req, res) => {
   res.send(note)
 })
 
+app.delete("/notes/:id", (req, res) => {
+  const { id } = req.params
+  notes = notes.filter((note) => note.id != id)
+  res.send(`Note with id ${id} deleted successfully.`)
+})
+
 app.listen(PORT, () => {
   console.log("Server is runnint on port ", PORT)
 })
