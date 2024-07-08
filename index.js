@@ -44,6 +44,19 @@ app.delete("/notes/:id", (req, res) => {
   res.send(`Note with id ${id} deleted successfully.`)
 })
 
+app.patch("/notes/:id", (req, res) => {
+  const {id} = req.params
+  const {title, content, isDraft} = req.body
+  const note = notes.find(note => note.id == id)
+
+  // These will be able to change the value in original notes array as note is an object, and it stores the reference to the original object stored in array, hence we can directly update the original array object content using the node variable
+  if(title) note.title = title
+  if(content) note.content = content
+  if(isDraft) note.isDraft = isDraft
+
+  res.send(`Updated ${id} with ease.`)
+})
+
 app.listen(PORT, () => {
   console.log("Server is runnint on port ", PORT)
 })
