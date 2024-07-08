@@ -26,10 +26,16 @@ app.get("/notes", (req, res) => {
   res.send(notes)
 })
 
-app.post("/add", (req, res) => {
+app.post("/notes", (req, res) => {
   const note = req.body
   notes.push({id: uuidV4(), ...note})
   res.send(`Added a note with title "${note.title}"`)
+})
+
+app.get("/notes/:id", (req, res) => {
+  const { id } = req.params
+  const note = notes.find((note) => note.id === id)
+  res.send(note)
 })
 
 app.listen(PORT, () => {
