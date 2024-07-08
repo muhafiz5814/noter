@@ -2,11 +2,14 @@ import { getNotes, createNote, getNoteById, deleteNote, updateNote } from "../..
 
 import { Router } from "express";
 
+import validator from "express-validator"
+const {body} = validator
+
 const router = Router()
 
 router.get("/", getNotes)
 
-router.post("/", createNote)
+router.post("/", body("title").exists(), body("isDraft").isBoolean(), createNote)
 
 router.get("/:id", getNoteById)
 

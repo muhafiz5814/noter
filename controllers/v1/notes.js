@@ -1,11 +1,17 @@
 import notes from "../../db/db.js";
 import { v4 as uuidV4 } from "uuid";
+import validator from "express-validator"
+const {validationResult} = validator
 
 export const getNotes = (req, res) => {
   res.send(notes)
 }
 
 export const createNote = (req, res) => {
+  const errors = validationResult(req)
+  
+  if(!errors.isEmpty()) return res.status(400).json({errors: errors.array()})
+
   const note = req.body
   notes.push({id: uuidV4(), ...note})
   res.send(`Added a note with title "${note.title}"`)
@@ -30,7 +36,7 @@ export const updateNote = (req, res) => {
   const {id} = req.params
   const {title, content, isDraft} = req.body
   const note = notes.find(note => note.id == id)
-
+  console.log(isDraft)
   // These will be able to change the value in original notes array as note is an object, and it stores the reference to the original object stored in array, hence we can directly update the original array object content using the node variable
   if(title) note.title = title
   if(content) note.content = content
