@@ -1,0 +1,21 @@
+{
+  "name": "noter",
+  "version": "1.0.0",
+  "description": "A simple note API.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "notes",
+    "api",
+    "note"
+  ],
+  "author": "Muhafiz Raza",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4"
+  }
+}
