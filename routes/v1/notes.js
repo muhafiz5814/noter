@@ -1,4 +1,5 @@
 import { getNotes, createNote, getNoteById, deleteNote, updateNote } from "../../controllers/v1/notes.js";
+import { authenticateUser } from "../../controllers/v1/auth.js";
 
 import { Router } from "express";
 
@@ -7,14 +8,14 @@ const {body} = validator
 
 const router = Router()
 
-router.get("/", getNotes)
+router.get("/", authenticateUser, getNotes)
 
-router.post("/", body("title").exists(), body("isDraft").isBoolean(), createNote)
+router.post("/", authenticateUser, body("title").exists(), body("isDraft").isBoolean(), createNote)
 
-router.get("/:id", getNoteById)
+router.get("/:id", authenticateUser, getNoteById)
 
-router.delete("/:id", deleteNote)
+router.delete("/:id", authenticateUser, deleteNote)
 
-router.patch("/:id", updateNote)
+router.patch("/:id", authenticateUser, updateNote)
 
 export default router
