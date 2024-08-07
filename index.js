@@ -5,7 +5,7 @@ import notesRoutesV1 from "./routes/v1/notes.js"
 import notesRoutesV2 from "./routes/v2/notes.js"
 
 const app = express()
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 
 app.use(express.urlencoded())
 app.use(express.json())
